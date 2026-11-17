@@ -1,7 +1,7 @@
 "build": {
   "appId": "uk.ducks.bluetoothradar",
   "productName": "Bluetooth Radar",
-  "copyright": "Copyright © 2026 Ducks UK",
+  "copyright": "Copyright © 2026 Ducks_UK",
   "directories": {
     "output": "release"
   },
