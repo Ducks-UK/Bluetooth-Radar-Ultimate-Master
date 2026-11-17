@@ -1,42 +1,24 @@
-{
-  "name": "bluetooth-radar",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "main": "electron/main.cjs",
-  "scripts": {
-    "start": "vite",
-    "build": "tsc -b && vite build",
-    "electron": "npm run build && electron electron/main.cjs",
-    "installer": "npm run build && electron-builder --win nsis --publish never"
+"build": {
+  "appId": "uk.ducks.bluetoothradar",
+  "productName": "Bluetooth Radar",
+  "copyright": "Copyright © 2026 Ducks UK",
+  "directories": {
+    "output": "release"
   },
-  "dependencies": {
-    "lucide-react": "^0.468.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+  "files": [
+    "dist/**/*",
+    "electron/**/*",
+    "package.json"
+  ],
+  "win": {
+    "target": "nsis",
+    "artifactName": "Bluetooth-Radar-Setup-${version}.${ext}"
   },
-  "devDependencies": {
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.4",
-    "electron": "^33.2.1",
-    "electron-builder": "^25.1.8",
-    "typescript": "~5.7.2",
-    "vite": "^6.0.1"
-  },
-  "build": {
-    "appId": "local.bluetooth.radar",
-    "productName": "Bluetooth Radar",
-    "directories": {
-      "output": "release"
-    },
-    "files": [
-      "dist/**/*",
-      "electron/**/*",
-      "package.json"
-    ],
-    "win": {
-      "target": "nsis"
-    }
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true
   }
 }
