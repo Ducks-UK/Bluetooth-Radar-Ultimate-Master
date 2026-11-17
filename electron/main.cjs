@@ -6,14 +6,20 @@ function createWindow() {
     width: 1280,
     height: 800,
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      preload: path.join(__dirname, "preload.cjs"),
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true
     }
   });
 
-  window.loadFile(path.join(__dirname, "..", "dist", "index.html"));
+  const devServerUrl = process.env.VITE_DEV_SERVER_URL;
+
+  if (devServerUrl) {
+    window.loadURL(devServerUrl);
+  } else {
+    window.loadFile(path.join(__dirname, "..", "dist", "index.html"));
+  }
 }
 
 app.whenReady().then(() => {
