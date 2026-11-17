@@ -1,5 +1,2 @@
-const { contextBridge } = require("electron");
-
-contextBridge.exposeInMainWorld("desktopInfo", {
-  isElectron: true
-});
+// Renderer runs without Node.js access.
+// Add narrowly scoped, validated APIs here if needed.
