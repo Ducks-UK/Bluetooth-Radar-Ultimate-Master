@@ -1,2 +1,2 @@
-// Renderer runs without Node.js access.
-// Add narrowly scoped, validated APIs here if needed.
+// The renderer has no Node.js access.
+// Add narrowly scoped, validated IPC APIs here when needed.
