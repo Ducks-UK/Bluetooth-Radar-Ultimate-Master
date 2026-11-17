@@ -46,6 +46,7 @@ export default function App() {
 
   const devices = useMemo<RadarDevice[]>(() => {
     const result = demo ? [...demoDevices] : [];
+
     if (bluetooth.device) {
       result.push({
         id: bluetooth.device.id,
@@ -56,19 +57,25 @@ export default function App() {
         lastSeen: bluetooth.status,
       });
     }
+
     return result;
   }, [demo, bluetooth.device, bluetooth.status]);
 
   function changeTheme(next: ThemeName) {
-    if (next === "Flashbang Mode" &&
-        !window.confirm("WARNING: FLASHBANG MODE! This theme is VERY bright. Continue?")) {
+    if (
+      next === "Flashbang Mode" &&
+      !window.confirm(
+        "WARNING: FLASHBANG MODE! This theme is VERY bright. Continue?",
+      )
+    ) {
       return;
     }
+
     setTheme(next);
   }
 
   return (
-    <main className={`app theme-${theme.toLowerCase().replaceAll(" ", "-")}`}>
+    <main className={`app theme-${theme.toLowerCase().replace(/ /g, "-")}`}>
       <Header
         demo={demo}
         scanning={scanning}
@@ -80,15 +87,23 @@ export default function App() {
         onBluetooth={bluetooth.selectDevice}
       />
 
-      {bluetooth.error && <div className="notice">{bluetooth.error}</div>}
+      {bluetooth.error && (
+        <div className="notice">{bluetooth.error}</div>
+      )}
+
       {bluetooth.device && (
         <div className="notice">
-          Bluetooth: {bluetooth.device.name || "Unnamed device"} — {bluetooth.status}
+          Bluetooth: {bluetooth.device.name || "Unnamed device"} —{" "}
+          {bluetooth.status}
           {bluetooth.device.gatt && (
             <>
               {" "}
-              <button className="text-button" onClick={bluetooth.connect}>Connect</button>
-              <button className="text-button" onClick={bluetooth.disconnect}>Disconnect</button>
+              <button className="text-button" onClick={bluetooth.connect}>
+                Connect
+              </button>
+              <button className="text-button" onClick={bluetooth.disconnect}>
+                Disconnect
+              </button>
             </>
           )}
         </div>
@@ -98,16 +113,30 @@ export default function App() {
 
       <section className="dashboard">
         <DeviceList devices={devices} onSelect={setSelected} />
-        <Radar devices={devices} scanning={scanning} onSelect={setSelected} />
+
+        <Radar
+          devices={devices}
+          scanning={scanning}
+          onSelect={setSelected}
+        />
+
         <aside className="panel stats-panel">
           <h2>Signal overview</h2>
-          <p>Devices shown: <strong>{devices.length}</strong></p>
-          <p>Radar scale: <strong>120 m</strong></p>
+          <p>
+            Devices shown: <strong>{devices.length}</strong>
+          </p>
+          <p>
+            Radar scale: <strong>120 m</strong>
+          </p>
           <p className="note">
             Distance and signal values are not available from this browser
             selection flow. Demo values are simulated.
           </p>
-          <DeviceDetails device={selected} onClose={() => setSelected(null)} />
+
+          <DeviceDetails
+            device={selected}
+            onClose={() => setSelected(null)}
+          />
         </aside>
       </section>
 
