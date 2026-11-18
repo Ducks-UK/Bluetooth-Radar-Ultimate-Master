@@ -6,6 +6,7 @@ import DeviceDetails from "./components/DeviceDetails";
 import ThemeSelector from "./components/ThemeSelector";
 import Frank from "./components/Frank";
 import { useBluetooth } from "./hooks/useBluetooth";
+import { useWindowsBluetooth } from "./hooks/useWindowsBluetooth";
 import type { RadarDevice, ThemeName } from "./types";
 
 const demoDevices: RadarDevice[] = [
@@ -43,7 +44,9 @@ export default function App() {
   const [scanning, setScanning] = useState(false);
   const [selected, setSelected] = useState<RadarDevice | null>(null);
   const [theme, setTheme] = useState<ThemeName>("Dark Mode");
+
   const bluetooth = useBluetooth();
+  const windowsBluetooth = useWindowsBluetooth(scanning);
 
   const devices = useMemo<RadarDevice[]>(() => {
     const result = demo ? [...demoDevices] : [];
@@ -122,7 +125,7 @@ export default function App() {
         <aside className="panel stats-panel">
           <h2>Signal overview</h2>
           <p>
-            Devices shown: <strong>{devices.length}</strong>
+            Radar devices shown: <strong>{devices.length}</strong>
           </p>
           <p>
             Radar scale: <strong>120 m</strong>
@@ -131,6 +134,30 @@ export default function App() {
             Distance and signal values are not available from this browser
             selection flow. Demo values are simulated.
           </p>
+
+          <section aria-label="Windows connected Bluetooth devices">
+            <h3>Windows-connected Bluetooth devices</h3>
+            <p>{windowsBluetooth.status}</p>
+
+            {windowsBluetooth.error && (
+              <p className="notice">{windowsBluetooth.error}</p>
+            )}
+
+            {windowsBluetooth.devices.length > 0 && (
+              <ul>
+                {windowsBluetooth.devices.map((device, index) => (
+                  <li key={`${device.name}-${index}`}>
+                    {device.name} — Connected to this PC
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <p className="note">
+              This lists connected Classic Bluetooth devices. Windows does not
+              provide radar RSSI or distance for these headphones.
+            </p>
+          </section>
 
           <DeviceDetails
             device={selected}
@@ -142,9 +169,12 @@ export default function App() {
       </section>
 
       <footer className="footer">
-        <span>{devices.length} devices shown</span>
+        <span>{devices.length} radar devices shown</span>
+        <span>
+          {windowsBluetooth.devices.length} Windows-connected devices
+        </span>
         <span>{demo ? "Demo data enabled" : "No demo devices"}</span>
-        <span>{bluetooth.status}</span>
+        <span>{scanning ? windowsBluetooth.status : bluetooth.status}</span>
       </footer>
     </main>
   );
