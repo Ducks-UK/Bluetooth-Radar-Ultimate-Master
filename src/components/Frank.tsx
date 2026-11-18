@@ -5,16 +5,10 @@ import "./Frank.css";
 
 export default function Frank() {
   const [showPopup, setShowPopup] = useState(false);
-  const [fixed, setFixed] = useState(false);
 
   return (
     <>
       <figure className="frank-card">
-        <img
-          className="frank-image"
-          src={frankImage}
-          alt="Jeff the WiFi Fixer"
-        />
         <figcaption className="frank-caption">
           Jeff the WiFi Fixer
         </figcaption>
@@ -22,10 +16,7 @@ export default function Frank() {
         <button
           type="button"
           className="fix-wifi-button"
-          onClick={() => {
-            setFixed(false);
-            setShowPopup(true);
-          }}
+          onClick={() => setShowPopup(true)}
         >
           Fix My WiFi
         </button>
@@ -53,31 +44,18 @@ export default function Frank() {
               ×
             </button>
 
-            {fixed ? (
-              <>
-                <img
-                  src={frankImage}
-                  alt="Jeff the WiFi Fixer"
-                  style={successImageStyle}
-                />
-                <h2 id="frank-dialog-title">WiFi fixed!</h2>
-                <p>Jeff the WiFi Fixer has saved the day.</p>
-                <button
-                  type="button"
-                  onClick={() => setShowPopup(false)}
-                >
-                  Awesome
-                </button>
-              </>
-            ) : (
-              <>
-                <h2 id="frank-dialog-title">Need a WiFi fix?</h2>
-                <p>Jeff is ready to work his magic.</p>
-                <button type="button" onClick={() => setFixed(true)}>
-                  Let Jeff fix it
-                </button>
-              </>
-            )}
+            <img
+              className="frank-image"
+              src={frankImage}
+              alt="Jeff the WiFi Fixer"
+            />
+
+            <h2 id="frank-dialog-title">WiFi fixed!</h2>
+            <p>Jeff the WiFi Fixer has saved the day.</p>
+
+            <button type="button" onClick={() => setShowPopup(false)}>
+              Awesome
+            </button>
           </section>
         </div>
       )}
@@ -115,13 +93,4 @@ const closeButtonStyle: CSSProperties = {
   color: "inherit",
   fontSize: "1.75rem",
   cursor: "pointer",
-};
-
-const successImageStyle: CSSProperties = {
-  display: "block",
-  width: "min(100%, 220px)",
-  maxHeight: "240px",
-  objectFit: "contain",
-  margin: "0 auto",
-  borderRadius: "8px",
 };
