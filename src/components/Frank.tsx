@@ -1,15 +1,14 @@
-import frankImage from "../images/frank.jpeg";
 import "./Frank.css";
 
 export default function Frank() {
   return (
-    <section className="frank-card" aria-label="Frank">
+    <figure className="frank-card">
       <img
         className="frank-image"
-        src={frankImage}
+        src="./frank.jpeg"
         alt="Frank, a hand-drawn character on graph paper"
       />
-      <p className="frank-caption">Frank</p>
-    </section>
+      <figcaption className="frank-caption">Frank</figcaption>
+    </figure>
   );
 }
