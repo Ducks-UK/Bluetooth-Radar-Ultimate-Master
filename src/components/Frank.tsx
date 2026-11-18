@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import frankImage from "../assets/frank.png";
 import "./Frank.css";
 
@@ -84,7 +85,7 @@ export default function Frank() {
   );
 }
 
-const overlayStyle: React.CSSProperties = {
+const overlayStyle: CSSProperties = {
   position: "fixed",
   inset: 0,
   zIndex: 1000,
@@ -94,7 +95,7 @@ const overlayStyle: React.CSSProperties = {
   background: "rgba(0, 0, 0, 0.7)",
 };
 
-const dialogStyle: React.CSSProperties = {
+const dialogStyle: CSSProperties = {
   position: "relative",
   width: "min(100%, 380px)",
   padding: "2rem",
@@ -105,7 +106,7 @@ const dialogStyle: React.CSSProperties = {
   boxShadow: "0 12px 40px rgba(0, 0, 0, 0.4)",
 };
 
-const closeButtonStyle: React.CSSProperties = {
+const closeButtonStyle: CSSProperties = {
   position: "absolute",
   top: "0.5rem",
   right: "0.75rem",
@@ -116,7 +117,7 @@ const closeButtonStyle: React.CSSProperties = {
   cursor: "pointer",
 };
 
-const successImageStyle: React.CSSProperties = {
+const successImageStyle: CSSProperties = {
   display: "block",
   width: "min(100%, 220px)",
   maxHeight: "240px",
