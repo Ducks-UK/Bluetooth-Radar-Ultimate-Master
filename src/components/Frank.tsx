@@ -1,3 +1,4 @@
+import frankImage from "../assets/frank.png";
 import "./Frank.css";
 
 export default function Frank() {
@@ -5,7 +6,7 @@ export default function Frank() {
     <figure className="frank-card">
       <img
         className="frank-image"
-        src="/frank.jpeg"
+        src={frankImage}
         alt="Frank, the WiFi fixer"
       />
       <figcaption className="frank-caption">
