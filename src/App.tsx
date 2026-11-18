@@ -4,6 +4,7 @@ import Radar from "./components/Radar";
 import DeviceList from "./components/DeviceList";
 import DeviceDetails from "./components/DeviceDetails";
 import ThemeSelector from "./components/ThemeSelector";
+import Frank from "./components/Frank";
 import { useBluetooth } from "./hooks/useBluetooth";
 import type { RadarDevice, ThemeName } from "./types";
 
@@ -87,9 +88,7 @@ export default function App() {
         onBluetooth={bluetooth.selectDevice}
       />
 
-      {bluetooth.error && (
-        <div className="notice">{bluetooth.error}</div>
-      )}
+      {bluetooth.error && <div className="notice">{bluetooth.error}</div>}
 
       {bluetooth.device && (
         <div className="notice">
@@ -137,6 +136,8 @@ export default function App() {
             device={selected}
             onClose={() => setSelected(null)}
           />
+
+          <Frank />
         </aside>
       </section>
 
