@@ -5,10 +5,12 @@ export default function Frank() {
     <figure className="frank-card">
       <img
         className="frank-image"
-        src="./frank.jpeg"
-        alt="Frank, a hand-drawn character on graph paper"
+        src="/frank.jpeg"
+        alt="Frank, the WiFi fixer"
       />
-      <figcaption className="frank-caption">Frank</figcaption>
+      <figcaption className="frank-caption">
+        Jeff the WiFi Fixer
+      </figcaption>
     </figure>
   );
 }
