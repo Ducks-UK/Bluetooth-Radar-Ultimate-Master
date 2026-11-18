@@ -1,17 +1,11 @@
-name: Build
+name: Build Windows installer
 
 on:
   push:
-    branches:
-      - main
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
-  windows-installer:
-    name: Build Windows installer
+  build-windows:
     runs-on: windows-latest
 
     steps:
@@ -23,13 +17,18 @@ jobs:
         with:
           node-version: 20
 
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
       - name: Install dependencies
         run: npm install
 
-      - name: Build Windows installer
+      - name: Build installer
         run: npm run installer
 
-      - name: Upload installer artifact
+      - name: Upload installer
         uses: actions/upload-artifact@v4
         with:
           name: Bluetooth-Radar-Windows-Installer
