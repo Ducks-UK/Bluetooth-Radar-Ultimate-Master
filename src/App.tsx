@@ -78,6 +78,10 @@ export default function App() {
     setTheme(next);
   }
 
+  function toggleLive() {
+    setScanning((currentlyScanning) => !currentlyScanning);
+  }
+
   return (
     <main className={`app theme-${theme.toLowerCase().replace(/ /g, "-")}`}>
       <Header
@@ -137,6 +141,15 @@ export default function App() {
 
           <section aria-label="Windows connected Bluetooth devices">
             <h3>Windows-connected Bluetooth devices</h3>
+
+            <button
+              type="button"
+              className="text-button"
+              onClick={toggleLive}
+            >
+              {scanning ? "Stop Live" : "Start Live"}
+            </button>
+
             <p>{windowsBluetooth.status}</p>
 
             {windowsBluetooth.error && (
@@ -154,8 +167,8 @@ export default function App() {
             )}
 
             <p className="note">
-              This lists connected Classic Bluetooth devices. Windows does not
-              provide radar RSSI or distance for these headphones.
+              This lists connected Classic Bluetooth devices. It does not
+              provide radar RSSI or distance.
             </p>
           </section>
 
@@ -174,7 +187,7 @@ export default function App() {
           {windowsBluetooth.devices.length} Windows-connected devices
         </span>
         <span>{demo ? "Demo data enabled" : "No demo devices"}</span>
-        <span>{scanning ? windowsBluetooth.status : bluetooth.status}</span>
+        <span>{scanning ? "Live mode running" : "Live mode stopped"}</span>
       </footer>
     </main>
   );
