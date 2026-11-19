@@ -47,7 +47,7 @@ export function useWindowsBluetooth(enabled: boolean) {
       requestInProgress = true;
 
       try {
-        const result = await api.getConnectedClassicDevices();
+        const result = await api!.getConnectedClassicDevices();
 
         if (stopped) return;
 
